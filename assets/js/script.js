@@ -23,14 +23,14 @@ let n_HighlightTimeCount = 0;
 var createScene = function(){
     scene = new BABYLON.Scene(engine);
     
-    camera = new BABYLON.ArcRotateCamera("Camera", 4, 1, 8000, new BABYLON.Vector3(0,30,0), scene);
+    camera = new BABYLON.ArcRotateCamera("Camera", 5.8, 1.45, 2000, new BABYLON.Vector3(0,100,0), scene);
     camera.attachControl(canvas, false);
     camera.upperBetaLimit = 1.57;
-    camera.lowerBetaLimit = 0.4;
+    // camera.lowerBetaLimit = 0.4;
     camera.wheelPrecision = 0.1;
     
-    // camera.upperRadiusLimit = 1200;
-    // camera.lowerRadiusLimit = 200;
+    camera.upperRadiusLimit = 3000;
+    camera.lowerRadiusLimit = 500;
 
     light1 = new BABYLON.PointLight("Omni", new BABYLON.Vector3(4000, 6000, 5000), scene);
     light2 = new BABYLON.PointLight("Omni", new BABYLON.Vector3(-4000, 7000, -6000), scene);
@@ -38,7 +38,7 @@ var createScene = function(){
     //load babylon model
     var assetsManager = new BABYLON.AssetsManager(scene);
 
-    //load cilindro 1
+    // load cilindro 1
     var meshTask1 = assetsManager.addMeshTask("model task", "", "assets/models/house/", "house.babylon");
     meshTask1.onSuccess = function (task) {
         // for(var i in task.loadedMeshes){
