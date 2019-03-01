@@ -31,8 +31,6 @@ var createScene = function(){
     camera.upperRadiusLimit = 1200;
     camera.lowerRadiusLimit = 200;
 
-    console.log('camera',camera)
-
     light1 = new BABYLON.PointLight("Omni", new BABYLON.Vector3(400, 600, 500), scene);
     light2 = new BABYLON.PointLight("Omni", new BABYLON.Vector3(-400, 700, -600), scene);
 
@@ -40,7 +38,7 @@ var createScene = function(){
     var assetsManager = new BABYLON.AssetsManager(scene);
 
     //load cilindro 1
-    var meshTask1 = assetsManager.addMeshTask("model task", "", "assets/models/babylon/", "cilindro-01.babylon");
+    var meshTask1 = assetsManager.addMeshTask("model task", "", "assets/models/house/", "cilindro-01.babylon");
     meshTask1.onSuccess = function (task) {
         // for(var i in task.loadedMeshes){
         //     task.loadedMeshes[i].position.z += 400;
