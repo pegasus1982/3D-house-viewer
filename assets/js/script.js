@@ -35,10 +35,9 @@ var createScene = function(){
     light1 = new BABYLON.PointLight("Omni", new BABYLON.Vector3(4000, 6000, 5000), scene);
     light2 = new BABYLON.PointLight("Omni", new BABYLON.Vector3(-4000, 7000, -6000), scene);
 
-    //load babylon model
     var assetsManager = new BABYLON.AssetsManager(scene);
 
-    // load cilindro 1
+    // load house model
     var meshTask1 = assetsManager.addMeshTask("model task", "", "assets/models/house/", "house.babylon");
     meshTask1.onSuccess = function (task) {
         // for(var i in task.loadedMeshes){
@@ -51,7 +50,9 @@ var createScene = function(){
         console.log(task,message,exception);
     }
 
-    // Ground
+    assetsManager.load();
+
+    //generate ground
     var ground = BABYLON.Mesh.CreateGroundFromHeightMap("ground", "assets/texture/heightMap-01.png", 6000, 6000, 30, 0, 500, scene, false);
     var groundMaterial = new BABYLON.StandardMaterial("ground", scene);
     groundMaterial.diffuseTexture = new BABYLON.Texture("assets/texture/grass.jpg", scene);
@@ -64,17 +65,21 @@ var createScene = function(){
     ground.receiveShadows = true;
     ground.checkCollisions = true;
 
+    //generate skybox
     var skybox = BABYLON.Mesh.CreateBox("skyBox", 10000.0, scene);
     var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
     skyboxMaterial.backFaceCulling = false;
     skyboxMaterial.disableLighting = true;
     skybox.material = skyboxMaterial;
     skybox.infiniteDistance = true;
-    skyboxMaterial.disableLighting = true;
+    // skyboxMaterial.disableLighting = true;
     skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("assets/texture/skybox", scene);
     skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
 
-    assetsManager.load();
+    //generate fog
+    scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
+    scene.fogDensity = 0.0003;
+    scene.fogColor = BABYLON.Color3.FromInts(222,222,222);
 
     return scene;
 }
