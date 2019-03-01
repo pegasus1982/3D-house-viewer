@@ -51,6 +51,29 @@ var createScene = function(){
         console.log(task,message,exception);
     }
 
+    // Ground
+    var ground = BABYLON.Mesh.CreateGroundFromHeightMap("ground", "assets/texture/heightMap-01.png", 6000, 6000, 30, 0, 500, scene, false);
+    var groundMaterial = new BABYLON.StandardMaterial("ground", scene);
+    groundMaterial.diffuseTexture = new BABYLON.Texture("assets/texture/grass.jpg", scene);
+
+    groundMaterial.diffuseTexture.uScale = 20;
+    groundMaterial.diffuseTexture.vScale = 20;
+    groundMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
+    groundMaterial.emissiveColor = new BABYLON.Color3(0.3, 0.3, 0.3);
+    ground.material = groundMaterial;
+    ground.receiveShadows = true;
+    ground.checkCollisions = true;
+
+    var skybox = BABYLON.Mesh.CreateBox("skyBox", 10000.0, scene);
+    var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
+    skyboxMaterial.backFaceCulling = false;
+    skyboxMaterial.disableLighting = true;
+    skybox.material = skyboxMaterial;
+    skybox.infiniteDistance = true;
+    skyboxMaterial.disableLighting = true;
+    skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("assets/texture/skybox", scene);
+    skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+
     assetsManager.load();
 
     return scene;
