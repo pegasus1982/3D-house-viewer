@@ -12,25 +12,32 @@ html, body {
     touch-action: none;
 }
 
-.input-section-container{
+.select-floor-container{
     position: absolute;
+    right : 0;
+    top : 0;
     background: rgba(0,0,0,0.3);
-    padding: 2rem;
-    padding-bottom: 1rem;
-    /* width : 300px;
-    height: 200px; */
-    top: 0;
-    right: 0;
+    padding: 0 1rem;
 }
 
-.input{
-    padding-bottom: 1rem;
+.select-floor{
+    border: 1px solid white;
+    padding: 0.3rem 0.6rem;
+    margin: 1rem 0;
+    border-radius: 0.2rem;
 }
 
-input{
-    min-width: 100px;
+.select-floor span{
+    color : white;
 }
 
-button{
-    width: 100%;
+.select-floor:hover{
+    background: white;
+    transition: .7s;
+    cursor: pointer;
+}
+
+.select-floor:hover span{
+    color : black;
+    transition: .7s;
 }

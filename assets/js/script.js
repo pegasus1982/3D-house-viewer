@@ -23,7 +23,7 @@ let n_HighlightTimeCount = 0;
 var createScene = function(){
     scene = new BABYLON.Scene(engine);
     
-    camera = new BABYLON.ArcRotateCamera("Camera", 5.8, 1.45, 2000, new BABYLON.Vector3(0,100,0), scene);
+    camera = new BABYLON.ArcRotateCamera("Camera", -0.36, 1.53, 2000, new BABYLON.Vector3(0,100,0), scene);
     camera.attachControl(canvas, false);
     camera.upperBetaLimit = 1.57;
     // camera.lowerBetaLimit = 0.4;
@@ -55,10 +55,10 @@ var createScene = function(){
     //generate ground
     var ground = BABYLON.Mesh.CreateGroundFromHeightMap("ground", "assets/texture/heightMap-01.png", 6000, 6000, 30, 0, 500, scene, false);
     var groundMaterial = new BABYLON.StandardMaterial("ground", scene);
-    groundMaterial.diffuseTexture = new BABYLON.Texture("assets/texture/grass.jpg", scene);
+    groundMaterial.diffuseTexture = new BABYLON.Texture("assets/texture/grass.png", scene);
 
-    groundMaterial.diffuseTexture.uScale = 20;
-    groundMaterial.diffuseTexture.vScale = 20;
+    groundMaterial.diffuseTexture.uScale = 40;
+    groundMaterial.diffuseTexture.vScale = 40;
     groundMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
     groundMaterial.emissiveColor = new BABYLON.Color3(0.3, 0.3, 0.3);
     ground.material = groundMaterial;
@@ -77,8 +77,6 @@ var createScene = function(){
             newMeshes[0].position.y = ground.getHeightAtCoordinates(0, 0); // Getting height from ground object
 
             // shadowGenerator.getShadowMap().renderList.push(newMeshes[0]);
-            var range = 7000;
-            var count = 20;
             var treeAxis = [
                 [2000,2000,100],
                 [-2000,2000,100],
@@ -144,7 +142,7 @@ var createScene = function(){
 
     //generate fog
     scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
-    scene.fogDensity = 0.0003;
+    scene.fogDensity = 0.0004;
     scene.fogColor = BABYLON.Color3.FromInts(222,222,222);
 
     return scene;
