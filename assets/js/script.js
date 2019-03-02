@@ -17,7 +17,7 @@ var modelHouse;
 var createScene = function(){
     scene = new BABYLON.Scene(engine);
     
-    camera = new BABYLON.ArcRotateCamera("Camera", -0.36, 1.53, 2000, new BABYLON.Vector3(0,100,0), scene);
+    camera = new BABYLON.ArcRotateCamera("Camera", -0.36, 1.53, 2000, new BABYLON.Vector3(0,40,0), scene);
     camera.attachControl(canvas, false);
     camera.upperBetaLimit = 1.57;
     // camera.lowerBetaLimit = 0.4;
@@ -37,6 +37,7 @@ var createScene = function(){
         for(var i in task.loadedMeshes){
             if(task.loadedMeshes[i].name == "PLAN_FLOOR_01" || task.loadedMeshes[i].name == "PLAN_FLOOR_02")
                 task.loadedMeshes[i].visibility = false;
+            task.loadedMeshes[i].position.y -= 40;
         }
         modelHouse = task.loadedMeshes;
     }
