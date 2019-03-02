@@ -34,6 +34,10 @@ var createScene = function(){
     // load house model
     var meshTask1 = assetsManager.addMeshTask("model task", "", "assets/models/house/", "house.babylon");
     meshTask1.onSuccess = function (task) {
+        for(var i in task.loadedMeshes){
+            if(task.loadedMeshes[i].name == "PLAN_FLOOR_01" || task.loadedMeshes[i].name == "PLAN_FLOOR_02")
+                task.loadedMeshes[i].visibility = false;
+        }
         modelHouse = task.loadedMeshes;
     }
 
@@ -169,6 +173,9 @@ function hideFloor1(){
             modelHouse[i].visibility = false;
         else if(modelName == 'MESH_GF_GROUND_FLOOR_CONCRETE___GENERAL')
             modelHouse[i].visibility = false;
+
+        if(modelName == "PLAN_FLOOR_02")
+            modelHouse[i].visibility = false;
     }
 }
 function hideFloor1Base(){
@@ -238,6 +245,11 @@ function hideFloor1Base(){
             modelHouse[i].visibility = false;
         else if(modelName == 'CEIL_F1_FOUNDATIONS_CONCRETE___GENERAL')
             modelHouse[i].visibility = true;
+
+        if(modelName == "PLAN_FLOOR_01")
+            modelHouse[i].visibility = true;
+        if(modelName == "PLAN_FLOOR_02")
+            modelHouse[i].visibility = false;
     }
 }
 
@@ -285,6 +297,9 @@ function hideFloor2Base(){
             modelHouse[i].visibility = false;
         else if(modelName == 'OBJ_F1_FOUNDATIONS_GDLM62_0133_GRAY')
             modelHouse[i].visibility = false;
+
+        if(modelName == "PLAN_FLOOR_02")
+            modelHouse[i].visibility = true;
     }
 }
 
@@ -294,7 +309,13 @@ $('.select-floor').click(function(){
     numFloor = parseInt(numFloor);
 
     for(var i in modelHouse){
-        modelHouse[i].visibility = true;
+        if(modelHouse[i].name == "PLAN_FLOOR_01" || modelHouse[i].name == "PLAN_FLOOR_02"){
+            modelHouse[i].visibility = false;
+        }
+        else{
+            modelHouse[i].visibility = true;
+        }
+        
     }
     //in case of floor 1 selected
     if(numFloor == 1){
