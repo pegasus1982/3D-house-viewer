@@ -17,13 +17,13 @@ var modelHouse;
 var createScene = function(){
     scene = new BABYLON.Scene(engine);
     
-    camera = new BABYLON.ArcRotateCamera("Camera", -0.36, 1.53, 2000, new BABYLON.Vector3(0,40,0), scene);
+    camera = new BABYLON.ArcRotateCamera("Camera", -0.36, 1.53, 1500, new BABYLON.Vector3(0,40,0), scene);
     camera.attachControl(canvas, false);
-    camera.upperBetaLimit = 1.57;
+    camera.upperBetaLimit = 1.58;
     // camera.lowerBetaLimit = 0.4;
     camera.wheelPrecision = 0.1;
     
-    camera.upperRadiusLimit = 3000;
+    camera.upperRadiusLimit = 2000;
     camera.lowerRadiusLimit = 500;
 
     light1 = new BABYLON.PointLight("Omni", new BABYLON.Vector3(4000, 6000, 5000), scene);
@@ -51,7 +51,7 @@ var createScene = function(){
     //generate ground
     var ground = BABYLON.Mesh.CreateGroundFromHeightMap("ground", "assets/texture/heightMap-01.png", 6000, 6000, 30, 0, 500, scene, false);
     var groundMaterial = new BABYLON.StandardMaterial("ground", scene);
-    groundMaterial.diffuseTexture = new BABYLON.Texture("assets/texture/grass.png", scene);
+    groundMaterial.diffuseTexture = new BABYLON.Texture("assets/texture/grass.jpg", scene);
 
     groundMaterial.diffuseTexture.uScale = 40;
     groundMaterial.diffuseTexture.vScale = 40;
@@ -126,7 +126,7 @@ var createScene = function(){
     }
 
     //generate skybox
-    var skybox = BABYLON.Mesh.CreateBox("skyBox", 10000.0, scene);
+    var skybox = BABYLON.Mesh.CreateBox("skyBox", 12000.0, scene);
     var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
     skyboxMaterial.backFaceCulling = false;
     skyboxMaterial.disableLighting = true;
