@@ -8,8 +8,6 @@ var scene,
     camera,
     light1,
     light2,
-    light3,
-    sphere,
     ground;
 
 var advancedTexture;
@@ -46,7 +44,7 @@ var createScene = function(){
     assetsManager.load();
 
     //generate ground
-    var ground = BABYLON.Mesh.CreateGroundFromHeightMap("ground", "assets/texture/heightMap-01.png", 5000, 5000, 30, 0, 500, scene, false);
+    var ground = BABYLON.Mesh.CreateGroundFromHeightMap("ground", "assets/texture/heightMap-01.png", 6000, 6000, 30, 0, 500, scene, false);
     var groundMaterial = new BABYLON.StandardMaterial("ground", scene);
     groundMaterial.diffuseTexture = new BABYLON.Texture("assets/texture/grass.png", scene);
 
@@ -71,32 +69,32 @@ var createScene = function(){
 
             // shadowGenerator.getShadowMap().renderList.push(newMeshes[0]);
             var treeAxis = [
-                [2000,2000,100],
-                [-2000,2000,100],
-                [-1800,2300,200],
-                [-2500,1800,240],
-                [-2000,1600,100],
-                [-2500,1400,100],
-                [-1000,1000,0],
-                [-1500,400,0],
-                [-1200,0,0],
-                [-1500,-300,0],
-                [-2500,0,0],
-                [-2000,-300,0],
-                [-2200,-900,0],
-                [-1600,-1400,0],
-                [0,1200,0],
-                [400,1200,0],
-                [800,1200,0],
-                [-200,1600,0],
-                [200,2000,0],
-                [600,1800,0],
-                [0,-800,0],
-                [400,-1100,0],
-                [800,-1400,0],
-                [-900,-1300,0],
-                [-600,-1100,0],
-                [-800,-1900,0],
+                [2000,  2000,   0],
+                [-2000, 2000,   100],
+                [-1800, 2300,   200],
+                [-2500, 1800,   240],
+                [-2000, 1600,   100],
+                [-2500, 1400,   100],
+                [-1000, 1000,   0],
+                [-1500, 400,    0],
+                [-1200, 0,      0],
+                [-1500, -300,   0],
+                [-2500, 0,      0],
+                [-2000, -300,   0],
+                [-2200, -900,   0],
+                [-1600, -1400,  0],
+                [0,     1200,   0],
+                [400,   1200,   0],
+                [800,   1200,   0],
+                [-200,  1600,   0],
+                [200,   2000,   0],
+                [600,   1800,   0],
+                [0,     -800,   0],
+                [400,   -1100,  0],
+                [800,   -1400,  0],
+                [-900,  -1300,  0],
+                [-600,  -1100,  0],
+                [-800,  -1900,  0],
             ];
             for (var index = 0; index < treeAxis.length; index++) {
                 var newInstance = newMeshes[0].createInstance("i" + index);
@@ -134,9 +132,9 @@ var createScene = function(){
     skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
 
     //generate fog
-    scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
-    scene.fogDensity = 0.0003;
-    scene.fogColor = BABYLON.Color3.FromInts(222,222,222);
+    // scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
+    // scene.fogDensity = 0.0003;
+    // scene.fogColor = BABYLON.Color3.FromInts(222,222,222);
 
     return scene;
 }
