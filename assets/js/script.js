@@ -46,7 +46,7 @@ var createScene = function(){
     assetsManager.load();
 
     //generate ground
-    var ground = BABYLON.Mesh.CreateGroundFromHeightMap("ground", "assets/texture/heightMap-01.png", 6000, 6000, 30, 0, 500, scene, false);
+    var ground = BABYLON.Mesh.CreateGroundFromHeightMap("ground", "assets/texture/heightMap-01.png", 5000, 5000, 30, 0, 500, scene, false);
     var groundMaterial = new BABYLON.StandardMaterial("ground", scene);
     groundMaterial.diffuseTexture = new BABYLON.Texture("assets/texture/grass.png", scene);
 
@@ -135,7 +135,7 @@ var createScene = function(){
 
     //generate fog
     scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
-    scene.fogDensity = 0.0004;
+    scene.fogDensity = 0.0003;
     scene.fogColor = BABYLON.Color3.FromInts(222,222,222);
 
     return scene;
@@ -155,14 +155,102 @@ window.addEventListener('resize', function(){
 });
 
 function hideFloor1(){
-
+    for(var i in modelHouse){
+        var modelName = modelHouse[i].name;
+        if(modelName.includes('CEIL_GF_'))
+            modelHouse[i].visibility = false;
+        else if(modelName.includes('BEAM_F1_'))
+            modelHouse[i].visibility = false;
+        else if(modelName.includes('DOOR_F1_'))
+            modelHouse[i].visibility = false;
+        else if(modelName.includes('OBJ_F1_'))
+            modelHouse[i].visibility = false;
+        else if(modelName.includes('WALL_F1_'))
+            modelHouse[i].visibility = false;
+        else if(modelName.includes('WIND_F1_'))
+            modelHouse[i].visibility = false;
+        else if(modelName == 'MESH_GF_GROUND_FLOOR_CONCRETE___GENERAL')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'OBJ_F1_FOUNDATIONS_GDLM59_PDM_GLASS_SIDEBOARD_0')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'OBJ_F1_FOUNDATIONS_GDLM60_PDM_STEEL_BRUSHED_54_FLAT_PART')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'OBJ_F1_FOUNDATIONS_GDLM60_PDM_STEEL_BRUSHED_54_SMOOTH_PART')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'OBJ_F1_FOUNDATIONS_GDLM61_0044_DARKGOLDENROD')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'OBJ_F1_FOUNDATIONS_GDLM58__COLOR_F17_2')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'OBJ_F1_FOUNDATIONS_GDLM56__AUTO_2_38')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'OBJ_F1_FOUNDATIONS_GLASS___BLUE_SMOOTH_PART')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'OBJ_F1_FOUNDATIONS_GLASS___BLUE_FLAT_PART')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'OBJ_F1_FOUNDATIONS_GDLM58__COLOR_F17_2')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'OBJ_F1_FOUNDATIONS_GDLM57_0022_MAROON')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'OBJ_F1_FOUNDATIONS_GDLM53__0136_CHARCOAL_1_FLAT_PART')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'OBJ_F1_FOUNDATIONS_GDLM53__0136_CHARCOAL_1_SMOOTH_PART')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'CEIL_F1_FOUNDATIONS_CONCEPT_WHITE')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'OBJ_F1_FOUNDATIONS_GDLM54_DEFAULT')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'OBJ_F1_FOUNDATIONS_WOOD___HARDWOOD')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'OBJ_F1_FOUNDATIONS_PAINT_IVORY_BLACK_FLAT_PART')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'OBJ_F1_FOUNDATIONS_PAINT_IVORY_BLACK')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'OBJ_F1_FOUNDATIONS_GDLM63_0038_ORANGE')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'OBJ_F1_FOUNDATIONS_GDLM63_0038_ORANGE')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'CEIL_F1_FOUNDATIONS_WOOD___HARDWOOD')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'CEIL_F1_FOUNDATIONS_SURF_PORCELAIN')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'CEIL_F1_FOUNDATIONS_SURF___PLASTIC_LAMINATE')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'CEIL_F1_FOUNDATIONS_PAINT___TITANIUM_WHITE')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'CEIL_F1_FOUNDATIONS_FINISH___FLOOR_CARPET')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'CEIL_F1_FOUNDATIONS_CONCRETE___GENERAL')
+            modelHouse[i].visibility = true;
+    }
 }
 
 function hideFloor2(){
     for(var i in modelHouse){
         var modelName = modelHouse[i].name;
-        console.log('name',modelName);
-        // if()
+        // console.log('name',modelName);
+        if(modelName.includes('ROOF_'))
+            modelHouse[i].visibility = false;
+        else if(modelName.includes('SKY_GF_'))
+            modelHouse[i].visibility = false;
+        else if(modelName.includes('BEAM_GF_'))
+            modelHouse[i].visibility = false;
+        else if(modelName.includes('DOOR_GF_'))
+            modelHouse[i].visibility = false;
+        else if(modelName.includes('WIND_GF_'))
+            modelHouse[i].visibility = false;
+        else if(modelName.includes('OBJ_GF_'))
+            modelHouse[i].visibility = false;
+        else if(modelName.includes('COLU_GF_'))
+            modelHouse[i].visibility = false;
+        else if(modelName.includes('WALL_GF_'))
+            modelHouse[i].visibility = false;
+
+        else if(modelName == 'CEIL_GF_GROUND_FLOOR_PAINT___TITANIUM_WHITE')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'CEIL_GF_GROUND_FLOOR_WOOD___SOFTWOOD')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'OBJ_F1_FOUNDATIONS_GDLM62_0133_GRAY')
+            modelHouse[i].visibility = false;
     }
 }
 
@@ -171,8 +259,13 @@ $('.select-floor').click(function(){
     var numFloor = $(this).attr('floor');
     numFloor = parseInt(numFloor);
 
+    for(var i in modelHouse){
+        modelHouse[i].visibility = true;
+    }
     //in case of floor 1 selected
     if(numFloor == 1){
+        hideFloor2();
+        hideFloor1();
     }
     //in case of floor 2 selected
     else if(numFloor == 2){
