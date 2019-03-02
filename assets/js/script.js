@@ -161,6 +161,25 @@ function hideFloor1(){
             modelHouse[i].visibility = false;
         else if(modelName.includes('DOOR_F1_'))
             modelHouse[i].visibility = false;
+        else if(modelName.includes('CEIL_GF_'))
+            modelHouse[i].visibility = false;
+        else if(modelName.includes('WIND_F1_'))
+            modelHouse[i].visibility = false;
+        else if(modelName == 'CEIL_F1_FOUNDATIONS_CONCEPT_WHITE')
+            modelHouse[i].visibility = false;
+        else if(modelName == 'MESH_GF_GROUND_FLOOR_CONCRETE___GENERAL')
+            modelHouse[i].visibility = false;
+    }
+}
+function hideFloor1Base(){
+    for(var i in modelHouse){
+        var modelName = modelHouse[i].name;
+        if(modelName.includes('CEIL_GF_'))
+            modelHouse[i].visibility = false;
+        else if(modelName.includes('BEAM_F1_'))
+            modelHouse[i].visibility = false;
+        else if(modelName.includes('DOOR_F1_'))
+            modelHouse[i].visibility = false;
         else if(modelName.includes('OBJ_F1_'))
             modelHouse[i].visibility = false;
         else if(modelName.includes('WALL_F1_'))
@@ -236,6 +255,23 @@ function hideFloor2(){
             modelHouse[i].visibility = false;
         else if(modelName.includes('WIND_GF_'))
             modelHouse[i].visibility = false;
+        else if(modelName.includes('COLU_GF_'))
+            modelHouse[i].visibility = false;
+    }
+}
+function hideFloor2Base(){
+    for(var i in modelHouse){
+        var modelName = modelHouse[i].name;
+        if(modelName.includes('ROOF_'))
+            modelHouse[i].visibility = false;
+        else if(modelName.includes('SKY_GF_'))
+            modelHouse[i].visibility = false;
+        else if(modelName.includes('BEAM_GF_'))
+            modelHouse[i].visibility = false;
+        else if(modelName.includes('DOOR_GF_'))
+            modelHouse[i].visibility = false;
+        else if(modelName.includes('WIND_GF_'))
+            modelHouse[i].visibility = false;
         else if(modelName.includes('OBJ_GF_'))
             modelHouse[i].visibility = false;
         else if(modelName.includes('COLU_GF_'))
@@ -262,12 +298,19 @@ $('.select-floor').click(function(){
     }
     //in case of floor 1 selected
     if(numFloor == 1){
-        hideFloor2();
+        hideFloor2Base();
         hideFloor1();
     }
-    //in case of floor 2 selected
     else if(numFloor == 2){
-        console.log('floor 2 selected');
+        hideFloor2Base();
+        hideFloor1Base();
+    }
+    else if(numFloor == 3){
         hideFloor2();
+    }
+    //in case of floor 2 selected
+    else if(numFloor == 4){
+        console.log('floor 2 selected');
+        hideFloor2Base();
     }
 })
