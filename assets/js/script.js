@@ -13,13 +13,9 @@ var scene,
     ground;
 
 var advancedTexture;
-var label_01,
-    label_02,
-    label_03,
-    label_04;
 
-var loadedModel = [];
-let n_HighlightTimeCount = 0;
+var modelHouse;
+
 var createScene = function(){
     scene = new BABYLON.Scene(engine);
     
@@ -40,10 +36,7 @@ var createScene = function(){
     // load house model
     var meshTask1 = assetsManager.addMeshTask("model task", "", "assets/models/house/", "house.babylon");
     meshTask1.onSuccess = function (task) {
-        // for(var i in task.loadedMeshes){
-        //     task.loadedMeshes[i].position.z += 400;
-        // }
-        loadedModel.push(task.loadedMeshes);
+        modelHouse = task.loadedMeshes;
     }
 
     meshTask1.onError = function(task,message,exception){
@@ -160,3 +153,30 @@ engine.runRenderLoop(function(){
 window.addEventListener('resize', function(){
     engine.resize();
 });
+
+function hideFloor1(){
+
+}
+
+function hideFloor2(){
+    for(var i in modelHouse){
+        var modelName = modelHouse[i].name;
+        console.log('name',modelName);
+        // if()
+    }
+}
+
+//add floor select event
+$('.select-floor').click(function(){
+    var numFloor = $(this).attr('floor');
+    numFloor = parseInt(numFloor);
+
+    //in case of floor 1 selected
+    if(numFloor == 1){
+    }
+    //in case of floor 2 selected
+    else if(numFloor == 2){
+        console.log('floor 2 selected');
+        hideFloor2();
+    }
+})
