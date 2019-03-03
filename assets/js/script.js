@@ -67,6 +67,75 @@ var planList = [
         name : "PLAN_FLOOR_02_ROOM_013",
         target : "floor-02-room-02.png"
     },
+
+    {
+        name : "PLAN_FLOOR_01_ROOM_001",
+        target : "floor-02-room-01.png"
+    },
+    {
+        name : "PLAN_FLOOR_01_ROOM_002",
+        target : "floor-02-room-01.png"
+    },
+    {
+        name : "PLAN_FLOOR_01_ROOM_003",
+        target : "floor-02-room-01.png"
+    },
+    {
+        name : "PLAN_FLOOR_01_ROOM_004",
+        target : "floor-02-room-01.png"
+    },
+    {
+        name : "PLAN_FLOOR_01_ROOM_005",
+        target : "floor-02-room-01.png"
+    },
+    {
+        name : "PLAN_FLOOR_01_ROOM_006",
+        target : "floor-02-room-01.png"
+    },
+    {
+        name : "PLAN_FLOOR_01_ROOM_007",
+        target : "floor-02-room-01.png"
+    },
+    {
+        name : "PLAN_FLOOR_01_ROOM_008",
+        target : "floor-02-room-01.png"
+    },
+    {
+        name : "PLAN_FLOOR_01_ROOM_009",
+        target : "floor-02-room-01.png"
+    },
+    {
+        name : "PLAN_FLOOR_01_ROOM_010",
+        target : "floor-02-room-01.png"
+    },
+    {
+        name : "PLAN_FLOOR_01_ROOM_011",
+        target : "floor-02-room-01.png"
+    },
+    {
+        name : "PLAN_FLOOR_01_ROOM_012",
+        target : "floor-02-room-01.png"
+    },
+    {
+        name : "PLAN_FLOOR_01_ROOM_013",
+        target : "floor-02-room-01.png"
+    },
+    {
+        name : "PLAN_FLOOR_01_ROOM_014",
+        target : "floor-02-room-01.png"
+    },
+    {
+        name : "PLAN_FLOOR_01_ROOM_015",
+        target : "floor-02-room-01.png"
+    },
+    {
+        name : "PLAN_FLOOR_01_ROOM_016",
+        target : "floor-02-room-01.png"
+    },
+    {
+        name : "PLAN_FLOOR_01_ROOM_017",
+        target : "floor-02-room-01.png"
+    },
 ];
 var createScene = function(){
     scene = new BABYLON.Scene(engine);
@@ -90,10 +159,10 @@ var createScene = function(){
     // load house model
     var meshTask1 = assetsManager.addMeshTask("model task", "", "assets/models/house/", "house.babylon");
     meshTask1.onSuccess = function (task) {
-        console.log(task.loadedMeshes)
         for(var i in task.loadedMeshes){
-            if(task.loadedMeshes[i].name == "PLAN_FLOOR_01" || task.loadedMeshes[i].name == "PLAN_FLOOR_02")
+            if(task.loadedMeshes[i].name.includes("PLAN_FLOOR_01") || task.loadedMeshes[i].name.includes("PLAN_FLOOR_02")){
                 task.loadedMeshes[i].visibility = false;
+            }
             task.loadedMeshes[i].position.y -= 40;
         }
         modelHouse = task.loadedMeshes;
@@ -435,7 +504,12 @@ function onPointerMove(evt){
             loadPlan();
             var random = Math.floor(Math.random()*10)%3 + 1;
             currentMesh.material = new BABYLON.StandardMaterial(currentMesh.name+random, scene);
-            currentMesh.material.diffuseTexture = new BABYLON.Texture("assets/texture/plans/floor-plan-2-random-color-"+random+".png", scene);
+            var baseUrl;
+            if(currentMesh.name.includes("PLAN_FLOOR_02"))
+                baseUrl = "assets/texture/plans/floor-plan-2-random-color-";
+            else
+                baseUrl = "assets/texture/plans/floor-plan-1-random-color-";
+            currentMesh.material.diffuseTexture = new BABYLON.Texture(baseUrl+random+".png", scene);
             currentMesh.material.diffuseTexture.uScale = 0.0016;
             currentMesh.material.diffuseTexture.vScale = 0.0016;
         }
