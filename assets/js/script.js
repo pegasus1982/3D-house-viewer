@@ -17,55 +17,55 @@ var modelHouse;
 var planList = [
     {
         name : "PLAN_FLOOR_02_ROOM_001",
-        target : ""
+        target : "floor-02-room-01.png"
     },
     {
         name : "PLAN_FLOOR_02_ROOM_002",
-        target : ""
+        target : "floor-02-room-02.png"
     },
     {
         name : "PLAN_FLOOR_02_ROOM_003",
-        target : ""
+        target : "floor-02-room-01.png"
     },
     {
         name : "PLAN_FLOOR_02_ROOM_004",
-        target : ""
+        target : "floor-02-room-02.png"
     },
     {
         name : "PLAN_FLOOR_02_ROOM_005",
-        target : ""
+        target : "floor-02-room-01.png"
     },
     {
         name : "PLAN_FLOOR_02_ROOM_006",
-        target : ""
+        target : "floor-02-room-01.png"
     },
     {
         name : "PLAN_FLOOR_02_ROOM_007",
-        target : ""
+        target : "floor-02-room-02.png"
     },
     {
         name : "PLAN_FLOOR_02_ROOM_008",
-        target : ""
+        target : "floor-02-room-02.png"
     },
     {
         name : "PLAN_FLOOR_02_ROOM_009",
-        target : ""
+        target : "floor-02-room-01.png"
     },
     {
         name : "PLAN_FLOOR_02_ROOM_010",
-        target : ""
+        target : "floor-02-room-02.png"
     },
     {
         name : "PLAN_FLOOR_02_ROOM_011",
-        target : ""
+        target : "floor-02-room-01.png"
     },
     {
         name : "PLAN_FLOOR_02_ROOM_012",
-        target : ""
+        target : "floor-02-room-02.png"
     },
     {
         name : "PLAN_FLOOR_02_ROOM_013",
-        target : ""
+        target : "floor-02-room-02.png"
     },
 ];
 var createScene = function(){
@@ -442,10 +442,12 @@ function onPointerMove(evt){
     }
 }
 
-function showModal(){
+function showModal(target){
     $('body').append(
                 '<div class="modal-container">'+
-                '<div class="modal-content"></div>'+
+                '<div class="modal-content">'+
+                '<img src="assets/texture/plans/seperated-plans/'+target+'"></img>'+
+                '</div>'+
                 '</div>'
             );
 }
@@ -466,7 +468,7 @@ function onPointerDown(evt){
             }
         }
         if(isPlan){
-            
+            showModal(target);
         }
     }
 }
@@ -474,4 +476,4 @@ function onPointerDown(evt){
 var canvas = engine.getRenderingCanvas();
 canvas.addEventListener('pointermove',onPointerMove);
 canvas.addEventListener('pointerdown',onPointerDown);
-showModal();
+// showModal();
