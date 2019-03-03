@@ -446,6 +446,7 @@ function showModal(target){
     $('body').append(
                 '<div class="modal-container">'+
                 '<div class="modal-content">'+
+                '<div class="close-modal"></div>'+
                 '<img src="assets/texture/plans/seperated-plans/'+target+'"></img>'+
                 '</div>'+
                 '</div>'
@@ -476,4 +477,4 @@ function onPointerDown(evt){
 var canvas = engine.getRenderingCanvas();
 canvas.addEventListener('pointermove',onPointerMove);
 canvas.addEventListener('pointerdown',onPointerDown);
-// showModal();
+showModal();

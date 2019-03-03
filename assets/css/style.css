@@ -59,4 +59,43 @@ html, body {
     margin-left : 10%;
     margin-top : 70px;
     background: white;
+    position : relative;
+}
+
+.close-modal{
+    position : absolute;
+    width : 50px;
+    height : 50px;
+    border-radius: 25px;
+    right : -25px;
+    top : -25px;
+    background : white;
+    cursor: pointer;
+}
+
+.close-modal:hover{
+    background: gray;
+    transition: .7s;
+}
+
+.close-modal::before{
+    position: absolute;
+    content: "";
+    width: 2px;
+    height: 33px;
+    background: black;
+    top: 9px;
+    left: 23px;
+    transform: rotateZ(45deg);
+}
+
+.close-modal::after{
+    position: absolute;
+    content: "";
+    width: 2px;
+    height: 33px;
+    background: black;
+    top: 9px;
+    left: 23px;
+    transform: rotateZ(-45deg);
 }
