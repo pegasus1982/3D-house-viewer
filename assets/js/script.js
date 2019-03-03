@@ -444,6 +444,7 @@ function loadPlan(){
             modelHouse[i].material.diffuseTexture.vOffset = 200;
             modelHouse[i].material.diffuseTexture.uScale = 0.0016;
             modelHouse[i].material.diffuseTexture.vScale = 0.0016;
+            modelHouse[i].material.specularColor = new BABYLON.Color3(0, 0, 0);
         }
     }
 }
@@ -512,6 +513,7 @@ function onPointerMove(evt){
             currentMesh.material.diffuseTexture = new BABYLON.Texture(baseUrl+random+".png", scene);
             currentMesh.material.diffuseTexture.uScale = 0.0016;
             currentMesh.material.diffuseTexture.vScale = 0.0016;
+            currentMesh.material.specularColor = new BABYLON.Color3(0, 0, 0);
         }
     }
 }
