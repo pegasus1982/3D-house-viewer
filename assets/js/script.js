@@ -137,6 +137,12 @@ var planList = [
         target : "floor-02-room-01.png"
     },
 ];
+
+var cameraSticker1,
+    cameraSticker2,
+    cameraSticker3,
+    cameraSticker4;
+
 var createScene = function(){
     scene = new BABYLON.Scene(engine);
     
@@ -168,7 +174,6 @@ var createScene = function(){
         modelHouse = task.loadedMeshes;
         for(var i in modelHouse){
             if(modelHouse[i].material.name == '_BARN H objGLASS___CLEAR'){
-                console.log('glass, add reflection');
                 modelHouse[i].material.reflectionTexture = new BABYLON.CubeTexture("assets/texture/skybox/TropicalSunnyDay", scene);
                 modelHouse[i].material.reflectionFresnelParameters = new BABYLON.FresnelParameters();
                 modelHouse[i].material.reflectionFresnelParameters.power = 100;
@@ -206,6 +211,7 @@ var createScene = function(){
     ground.onReady = function(){
         ground.optimize(100);
 
+        //scatter trees
         BABYLON.SceneLoader.ImportMesh("","assets/models/terrain/","tree-01.babylon",scene, function(newMeshes){
             newMeshes[0].material.opacityTexture = null;
             newMeshes[0].material.backFaceCulling = false;
@@ -262,7 +268,7 @@ var createScene = function(){
             // Collisions
             camera.checkCollisions = true;
             camera.applyGravity = true;
-        })
+        });
     }
 
     //generate skybox
@@ -276,12 +282,40 @@ var createScene = function(){
     skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("assets/texture/skybox/TropicalSunnyDay", scene);
     skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
     skybox.rotation.y = -Math.PI/2;
+    
+    BABYLON.SceneLoader.ImportMesh("","assets/models/terrain/","map-sticker.babylon",scene, function(newMeshes){
+        cameraSticker1 = newMeshes[0];
+        cameraSticker1.position.x = 600;
+        cameraSticker1.position.y = 10;
+        cameraSticker1.position.z = 600;
+        cameraSticker1.name = "camera-sticker-01";
+        cameraSticker1.rotate(BABYLON.Axis.Y, Math.random() * Math.PI * 2, BABYLON.Space.WORLD);
 
-    //generate fog
-    // scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
-    // scene.fogDensity = 0.0003;
-    // scene.fogColor = BABYLON.Color3.FromInts(222,222,222);
+        cameraSticker2 = cameraSticker1.clone();
+        cameraSticker2.position.x = 1500;
+        cameraSticker2.position.z = -500;
+        cameraSticker2.name = "camera-sticker-02";
+        cameraSticker2.rotate(BABYLON.Axis.Y, Math.random() * Math.PI * 2, BABYLON.Space.WORLD);
 
+        cameraSticker3 = cameraSticker1.clone();
+        cameraSticker3.position.x = -1000;
+        cameraSticker3.position.z = -800;
+        cameraSticker3.name = "camera-sticker-03";
+        cameraSticker3.rotate(BABYLON.Axis.Y, Math.random() * Math.PI * 2, BABYLON.Space.WORLD);
+
+        cameraSticker4 = cameraSticker1.clone();
+        cameraSticker4.position.x = -600;
+        cameraSticker4.position.z = 900;
+        cameraSticker4.name = "camera-sticker-04";
+        cameraSticker4.rotate(BABYLON.Axis.Y, Math.random() * Math.PI * 2, BABYLON.Space.WORLD);
+
+        scene.registerBeforeRender(function(){
+            cameraSticker1.rotation.y += 0.1;
+            cameraSticker2.rotation.y += 0.1;
+            cameraSticker3.rotation.y += 0.1;
+            cameraSticker4.rotation.y += 0.1;
+        })
+    });
     return scene;
 }
 
@@ -544,22 +578,30 @@ function showModal(target){
 }
 function onPointerDown(evt){
     var pickInfo = scene.pick(scene.pointerX, scene.pointerY,function(mesh){
-        return (mesh.visibility && (mesh.name.includes("PLAN_FLOOR_01") || mesh.name.includes("PLAN_FLOOR_02")))
+        return (mesh.visibility && (mesh.name.includes("PLAN_FLOOR_01") || mesh.name.includes("PLAN_FLOOR_02") || mesh.name.includes('camera-sticker-')))
     })
     if(pickInfo.hit){
         var currentMesh = pickInfo.pickedMesh;
         console.log(currentMesh.name)
-        var isPlan = false;
-        var target = null;
-        for(var i in planList){
-            if(currentMesh.visibility && currentMesh.name == planList[i].name){
-                isPlan = true;
-                target = planList[i].target;
-                break;
+        //if plan
+        if(currentMesh.name.includes("PLAN_FLOOR_01") || currentMesh.name.includes("PLAN_FLOOR_02"))
+        {
+            var isPlan = false;
+            var target = null;
+            for(var i in planList){
+                if(currentMesh.visibility && currentMesh.name == planList[i].name){
+                    isPlan = true;
+                    target = planList[i].target;
+                    break;
+                }
+            }
+            if(isPlan){
+                showModal(target);
             }
         }
-        if(isPlan){
-            showModal(target);
+        //else if sticker
+        else if(currentMesh.name.includes('camera-sticker-')){
+
         }
     }
 }
