@@ -143,6 +143,11 @@ var cameraSticker1,
     cameraSticker3,
     cameraSticker4;
 
+var universalCamera1,
+    universalCamera2,
+    universalCamera3,
+    universalCamera4;
+
 var createScene = function(){
     scene = new BABYLON.Scene(engine);
     
@@ -272,7 +277,7 @@ var createScene = function(){
     }
 
     //generate skybox
-    var skybox = BABYLON.Mesh.CreateBox("skyBox", 12000.0, scene);
+    var skybox = BABYLON.Mesh.CreateBox("skyBox", 10000.0, scene);
     var skyboxMaterial = new BABYLON.StandardMaterial("skyBox", scene);
     skyboxMaterial.backFaceCulling = false;
     skyboxMaterial.disableLighting = true;
@@ -291,11 +296,30 @@ var createScene = function(){
         cameraSticker1.name = "camera-sticker-01";
         cameraSticker1.rotate(BABYLON.Axis.Y, Math.random() * Math.PI * 2, BABYLON.Space.WORLD);
 
+        universalCamera1 = new BABYLON.UniversalCamera("camera-001",new BABYLON.Vector3(600,60,600),scene);
+        universalCamera1.setTarget(BABYLON.Vector3.Zero());
+        universalCamera1.keysDown = [];
+        universalCamera1.keysUp = [];
+        universalCamera1.keysLeft = [];
+        universalCamera1.keysRight = [];
+        // scene.activeCamera = universalCamera1;
+        // scene.activeCamera.attachControl(canvas,false);
+        // console.log('universal camera',universalCamera1);
+
         cameraSticker2 = cameraSticker1.clone();
         cameraSticker2.position.x = 1500;
         cameraSticker2.position.z = -500;
         cameraSticker2.name = "camera-sticker-02";
         cameraSticker2.rotate(BABYLON.Axis.Y, Math.random() * Math.PI * 2, BABYLON.Space.WORLD);
+
+        universalCamera2 = new BABYLON.UniversalCamera("camera-002",new BABYLON.Vector3(1500,60,-500),scene);
+        universalCamera2.setTarget(BABYLON.Vector3.Zero());
+        universalCamera2.keysDown = [];
+        universalCamera2.keysUp = [];
+        universalCamera2.keysLeft = [];
+        universalCamera2.keysRight = [];
+        // scene.activeCamera = universalCamera2;
+        // scene.activeCamera.attachControl(canvas,false);
 
         cameraSticker3 = cameraSticker1.clone();
         cameraSticker3.position.x = -1000;
@@ -303,11 +327,29 @@ var createScene = function(){
         cameraSticker3.name = "camera-sticker-03";
         cameraSticker3.rotate(BABYLON.Axis.Y, Math.random() * Math.PI * 2, BABYLON.Space.WORLD);
 
+        universalCamera3 = new BABYLON.UniversalCamera("camera-003",new BABYLON.Vector3(-1000,60,-800),scene);
+        universalCamera3.setTarget(BABYLON.Vector3.Zero());
+        universalCamera3.keysDown = [];
+        universalCamera3.keysUp = [];
+        universalCamera3.keysLeft = [];
+        universalCamera3.keysRight = [];
+        // scene.activeCamera = universalCamera3;
+        // scene.activeCamera.attachControl(canvas,false);
+
         cameraSticker4 = cameraSticker1.clone();
         cameraSticker4.position.x = -600;
         cameraSticker4.position.z = 900;
         cameraSticker4.name = "camera-sticker-04";
         cameraSticker4.rotate(BABYLON.Axis.Y, Math.random() * Math.PI * 2, BABYLON.Space.WORLD);
+
+        universalCamera4 = new BABYLON.UniversalCamera("camera-004",new BABYLON.Vector3(-600,60,900),scene);
+        universalCamera4.setTarget(BABYLON.Vector3.Zero());
+        universalCamera4.keysDown = [];
+        universalCamera4.keysUp = [];
+        universalCamera4.keysLeft = [];
+        universalCamera4.keysRight = [];
+        // scene.activeCamera = universalCamera4;
+        // scene.activeCamera.attachControl(canvas,false);
 
         scene.registerBeforeRender(function(){
             cameraSticker1.rotation.y += 0.1;
@@ -601,7 +643,35 @@ function onPointerDown(evt){
         }
         //else if sticker
         else if(currentMesh.name.includes('camera-sticker-')){
+            cameraSticker1.visibility = true;
+            cameraSticker2.visibility = true;
+            cameraSticker3.visibility = true;
+            cameraSticker4.visibility = true;
 
+            switch(currentMesh.name){
+                case 'camera-sticker-01':
+                    scene.activeCamera = universalCamera1;
+                    scene.activeCamera.attachControl(canvas,false);
+                    cameraSticker1.visibility = false;
+                    break;
+                case 'camera-sticker-02':
+                    scene.activeCamera = universalCamera2;
+                    scene.activeCamera.attachControl(canvas,false);
+                    cameraSticker2.visibility = false;
+                    break;
+                case 'camera-sticker-03':
+                    scene.activeCamera = universalCamera3;
+                    scene.activeCamera.attachControl(canvas,false);
+                    cameraSticker3.visibility = false;
+                    break;
+                case 'camera-sticker-04':
+                    scene.activeCamera = universalCamera4;
+                    scene.activeCamera.attachControl(canvas,false);
+                    cameraSticker4.visibility = false;
+                    break;
+                default:
+                    return;
+            }
         }
     }
 }
