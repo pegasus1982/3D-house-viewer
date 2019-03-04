@@ -567,6 +567,16 @@ $('.select-floor').click(function(){
     }
 })
 
+$('.normal-view').click(function(){
+    cameraSticker1.visibility = true;
+    cameraSticker2.visibility = true;
+    cameraSticker3.visibility = true;
+    cameraSticker4.visibility = true;
+
+    scene.activeCamera = camera;
+    scene.activeCamera.attachControl(canvas,false);
+})
+
 //mouse move event
 var current = null;
 function onPointerMove(evt){

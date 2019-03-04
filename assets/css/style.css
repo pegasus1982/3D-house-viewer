@@ -38,7 +38,26 @@ html, body {
     cursor: pointer;
 }
 
-.select-floor:hover span{
+.normal-view{
+    border: 1px solid white;
+    padding: 0.3rem 0.6rem;
+    margin: 1rem 0;
+    border-radius: 0.2rem;
+    text-align: center;
+    background: rgba(255,34,76,0.5);
+}
+
+.normal-view span{
+    color : white;
+}
+
+.normal-view:hover{
+    background: white;
+    transition: .7s;
+    cursor: pointer;
+}
+
+.normal-view:hover span{
     color : black;
     transition: .7s;
 }
