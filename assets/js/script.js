@@ -151,7 +151,7 @@ var createScene = function(){
 
     // light1 = new BABYLON.PointLight("Omni", new BABYLON.Vector3(4000, 6000, 5000), scene);
     light2 = new BABYLON.PointLight("Omni", new BABYLON.Vector3(-4000, 7000, -6000), scene);
-    light3 = new BABYLON.PointLight("Omni", new BABYLON.Vector3(4000, 2000, 900), scene);
+    light3 = new BABYLON.PointLight("Omni", new BABYLON.Vector3(4000, 2000, -900), scene);
 
     var shadowGenerator = new BABYLON.ShadowGenerator(1024,light3);
     var assetsManager = new BABYLON.AssetsManager(scene);
@@ -166,6 +166,15 @@ var createScene = function(){
             task.loadedMeshes[i].position.y -= 40;
         }
         modelHouse = task.loadedMeshes;
+        for(var i in modelHouse){
+            if(modelHouse[i].material.name == '_BARN H objGLASS___CLEAR'){
+                console.log('glass, add reflection');
+                modelHouse[i].material.reflectionTexture = new BABYLON.CubeTexture("assets/texture/skybox/TropicalSunnyDay", scene);
+                modelHouse[i].material.reflectionFresnelParameters = new BABYLON.FresnelParameters();
+                modelHouse[i].material.reflectionFresnelParameters.power = 100;
+                modelHouse[i].material.specularPower = 500;
+            }
+        }
     }
 
     meshTask1.onError = function(task,message,exception){
@@ -264,8 +273,9 @@ var createScene = function(){
     skybox.material = skyboxMaterial;
     skybox.infiniteDistance = true;
     // skyboxMaterial.disableLighting = true;
-    skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("assets/texture/skybox", scene);
+    skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("assets/texture/skybox/TropicalSunnyDay", scene);
     skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
+    skybox.rotation.y = -Math.PI/2;
 
     //generate fog
     // scene.fogMode = BABYLON.Scene.FOGMODE_EXP;
