@@ -174,7 +174,7 @@ var createScene = function(){
             if(task.loadedMeshes[i].name.includes("PLAN_FLOOR_01") || task.loadedMeshes[i].name.includes("PLAN_FLOOR_02")){
                 task.loadedMeshes[i].visibility = false;
             }
-            task.loadedMeshes[i].position.y -= 40;
+            task.loadedMeshes[i].position.y -= 35;
         }
         modelHouse = task.loadedMeshes;
         for(var i in modelHouse){
@@ -289,14 +289,21 @@ var createScene = function(){
     skybox.rotation.y = -Math.PI/2;
     
     BABYLON.SceneLoader.ImportMesh("","assets/models/terrain/","map-sticker.babylon",scene, function(newMeshes){
+        var cameraStickerPosition = [
+            [600,600],
+            [1500,-500],
+            [-1000,-800],
+            [-800,700]
+        ];
+
         cameraSticker1 = newMeshes[0];
-        cameraSticker1.position.x = 600;
+        cameraSticker1.position.x = cameraStickerPosition[0][0];
         cameraSticker1.position.y = 10;
-        cameraSticker1.position.z = 600;
+        cameraSticker1.position.z = cameraStickerPosition[0][1];
         cameraSticker1.name = "camera-sticker-01";
         cameraSticker1.rotate(BABYLON.Axis.Y, Math.random() * Math.PI * 2, BABYLON.Space.WORLD);
 
-        universalCamera1 = new BABYLON.UniversalCamera("camera-001",new BABYLON.Vector3(600,60,600),scene);
+        universalCamera1 = new BABYLON.UniversalCamera("camera-001",new BABYLON.Vector3(cameraStickerPosition[0][0],60,cameraStickerPosition[0][1]),scene);
         universalCamera1.setTarget(BABYLON.Vector3.Zero());
         universalCamera1.keysDown = [];
         universalCamera1.keysUp = [];
@@ -307,12 +314,12 @@ var createScene = function(){
         // console.log('universal camera',universalCamera1);
 
         cameraSticker2 = cameraSticker1.clone();
-        cameraSticker2.position.x = 1500;
-        cameraSticker2.position.z = -500;
+        cameraSticker2.position.x = cameraStickerPosition[1][0];
+        cameraSticker2.position.z = cameraStickerPosition[1][1];
         cameraSticker2.name = "camera-sticker-02";
         cameraSticker2.rotate(BABYLON.Axis.Y, Math.random() * Math.PI * 2, BABYLON.Space.WORLD);
 
-        universalCamera2 = new BABYLON.UniversalCamera("camera-002",new BABYLON.Vector3(1500,60,-500),scene);
+        universalCamera2 = new BABYLON.UniversalCamera("camera-002",new BABYLON.Vector3(cameraStickerPosition[1][0],60,cameraStickerPosition[1][1]),scene);
         universalCamera2.setTarget(BABYLON.Vector3.Zero());
         universalCamera2.keysDown = [];
         universalCamera2.keysUp = [];
@@ -322,12 +329,12 @@ var createScene = function(){
         // scene.activeCamera.attachControl(canvas,false);
 
         cameraSticker3 = cameraSticker1.clone();
-        cameraSticker3.position.x = -1000;
-        cameraSticker3.position.z = -800;
+        cameraSticker3.position.x = cameraStickerPosition[2][0];
+        cameraSticker3.position.z = cameraStickerPosition[2][1];
         cameraSticker3.name = "camera-sticker-03";
         cameraSticker3.rotate(BABYLON.Axis.Y, Math.random() * Math.PI * 2, BABYLON.Space.WORLD);
 
-        universalCamera3 = new BABYLON.UniversalCamera("camera-003",new BABYLON.Vector3(-1000,60,-800),scene);
+        universalCamera3 = new BABYLON.UniversalCamera("camera-003",new BABYLON.Vector3(cameraStickerPosition[2][0],60,cameraStickerPosition[2][1]),scene);
         universalCamera3.setTarget(BABYLON.Vector3.Zero());
         universalCamera3.keysDown = [];
         universalCamera3.keysUp = [];
@@ -337,12 +344,12 @@ var createScene = function(){
         // scene.activeCamera.attachControl(canvas,false);
 
         cameraSticker4 = cameraSticker1.clone();
-        cameraSticker4.position.x = -600;
-        cameraSticker4.position.z = 900;
+        cameraSticker4.position.x = cameraStickerPosition[3][0];
+        cameraSticker4.position.z = cameraStickerPosition[3][1];
         cameraSticker4.name = "camera-sticker-04";
         cameraSticker4.rotate(BABYLON.Axis.Y, Math.random() * Math.PI * 2, BABYLON.Space.WORLD);
 
-        universalCamera4 = new BABYLON.UniversalCamera("camera-004",new BABYLON.Vector3(-600,60,900),scene);
+        universalCamera4 = new BABYLON.UniversalCamera("camera-004",new BABYLON.Vector3(cameraStickerPosition[3][0],60,cameraStickerPosition[3][1]),scene);
         universalCamera4.setTarget(BABYLON.Vector3.Zero());
         universalCamera4.keysDown = [];
         universalCamera4.keysUp = [];
@@ -357,6 +364,13 @@ var createScene = function(){
             cameraSticker3.rotation.y += 0.1;
             cameraSticker4.rotation.y += 0.1;
         })
+    });
+
+    //import garden
+    BABYLON.SceneLoader.ImportMesh("","assets/models/terrain/","garden.babylon",scene, function(newMeshes){
+        for(var i in newMeshes){
+            newMeshes[i].position.z += 19;
+        }
     });
     return scene;
 }
