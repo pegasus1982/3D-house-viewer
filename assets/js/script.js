@@ -193,13 +193,6 @@ var createScene = function(){
 
     assetsManager.load();
 
-    // var box1 = new BABYLON.Mesh.CreateBox("box 1",40,scene,false);
-    // box1.position = new BABYLON.Vector3(100,100,100)
-    // var shadowGenerator1 = new BABYLON.ShadowGenerator(512,light3);
-    // shadowGenerator1.getShadowMap().renderList.push(box1);
-    // shadowGenerator1.useBlurExponentialShadowMap = true;
-    // shadowGenerator1.blurBoxOffset = 2.0;
-
     //generate ground
     var ground = BABYLON.Mesh.CreateGroundFromHeightMap("ground", "assets/texture/heightMap-01.png", 6000, 6000, 30, 0, 500, scene, false);
     var groundMaterial = new BABYLON.StandardMaterial("ground", scene);
@@ -208,7 +201,6 @@ var createScene = function(){
     groundMaterial.diffuseTexture.uScale = 40;
     groundMaterial.diffuseTexture.vScale = 40;
     groundMaterial.specularColor = new BABYLON.Color3(0, 0, 0);
-    // groundMaterial.emissiveColor = new BABYLON.Color3(0.3, 0.3, 0.3);
     ground.material = groundMaterial;
     ground.receiveShadows = true;
     ground.checkCollisions = true;
@@ -267,7 +259,7 @@ var createScene = function(){
 
                 shadowGenerator.getShadowMap().renderList.push(newInstance);
             }
-            shadowGenerator.getShadowMap().refreshRate = 0; // We need to compute it just once
+            shadowGenerator.getShadowMap().refreshRate = 0;
             shadowGenerator.usePoissonSampling = true;
 
             // Collisions
@@ -283,7 +275,7 @@ var createScene = function(){
     skyboxMaterial.disableLighting = true;
     skybox.material = skyboxMaterial;
     skybox.infiniteDistance = true;
-    // skyboxMaterial.disableLighting = true;
+    
     skyboxMaterial.reflectionTexture = new BABYLON.CubeTexture("assets/texture/skybox/TropicalSunnyDay", scene);
     skyboxMaterial.reflectionTexture.coordinatesMode = BABYLON.Texture.SKYBOX_MODE;
     skybox.rotation.y = -Math.PI/2;
@@ -309,9 +301,6 @@ var createScene = function(){
         universalCamera1.keysUp = [];
         universalCamera1.keysLeft = [];
         universalCamera1.keysRight = [];
-        // scene.activeCamera = universalCamera1;
-        // scene.activeCamera.attachControl(canvas,false);
-        // console.log('universal camera',universalCamera1);
 
         cameraSticker2 = cameraSticker1.clone();
         cameraSticker2.position.x = cameraStickerPosition[1][0];
@@ -325,8 +314,6 @@ var createScene = function(){
         universalCamera2.keysUp = [];
         universalCamera2.keysLeft = [];
         universalCamera2.keysRight = [];
-        // scene.activeCamera = universalCamera2;
-        // scene.activeCamera.attachControl(canvas,false);
 
         cameraSticker3 = cameraSticker1.clone();
         cameraSticker3.position.x = cameraStickerPosition[2][0];
@@ -340,8 +327,6 @@ var createScene = function(){
         universalCamera3.keysUp = [];
         universalCamera3.keysLeft = [];
         universalCamera3.keysRight = [];
-        // scene.activeCamera = universalCamera3;
-        // scene.activeCamera.attachControl(canvas,false);
 
         cameraSticker4 = cameraSticker1.clone();
         cameraSticker4.position.x = cameraStickerPosition[3][0];
@@ -355,8 +340,6 @@ var createScene = function(){
         universalCamera4.keysUp = [];
         universalCamera4.keysLeft = [];
         universalCamera4.keysRight = [];
-        // scene.activeCamera = universalCamera4;
-        // scene.activeCamera.attachControl(canvas,false);
 
         scene.registerBeforeRender(function(){
             cameraSticker1.rotation.y += 0.1;
