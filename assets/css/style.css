@@ -73,12 +73,15 @@ html, body {
 }
 
 .modal-content{
-    width : 80%;
-    height : 80%;
-    margin-left : 10%;
-    margin-top : 70px;
+    width: 80%;
+    height: 80%;
+    margin-left: 10%;
+    margin-top: 70px;
     background: white;
-    position : relative;
+    position: relative;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
 }
 
 .close-modal{
