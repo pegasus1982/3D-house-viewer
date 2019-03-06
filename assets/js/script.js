@@ -210,68 +210,68 @@ var createScene = function(){
     ground.receiveShadows = true;
     ground.checkCollisions = true;
 
-    // ground.onReady = function(){
-    //     ground.optimize(100);
+    ground.onReady = function(){
+        ground.optimize(100);
 
-    //     //scatter trees
-    //     BABYLON.SceneLoader.ImportMesh("","assets/models/terrain/","tree-01.babylon",scene, function(newMeshes){
-    //         newMeshes[0].material.opacityTexture = null;
-    //         newMeshes[0].material.backFaceCulling = false;
-    //         newMeshes[0].isVisible = false;
-    //         newMeshes[0].position.y = ground.getHeightAtCoordinates(0, 0); // Getting height from ground object
+        //scatter trees
+        BABYLON.SceneLoader.ImportMesh("","assets/models/terrain/","tree-01.babylon",scene, function(newMeshes){
+            newMeshes[0].material.opacityTexture = null;
+            newMeshes[0].material.backFaceCulling = false;
+            newMeshes[0].isVisible = false;
+            newMeshes[0].position.y = ground.getHeightAtCoordinates(0, 0); // Getting height from ground object
 
-    //         shadowGenerator.getShadowMap().renderList.push(newMeshes[0]);
-    //         var treeAxis = [
-    //             [2000,  2000,   0],
-    //             [-2000, 2000,   100],
-    //             [-1800, 2300,   200],
-    //             [-2500, 1800,   240],
-    //             [-2000, 1600,   100],
-    //             [-2500, 1400,   100],
-    //             [-1000, 1000,   0],
-    //             [-1500, 400,    0],
-    //             [-1200, 0,      0],
-    //             [-1500, -300,   0],
-    //             [-2500, 0,      0],
-    //             [-2000, -300,   0],
-    //             [-2200, -900,   0],
-    //             [-1600, -1400,  0],
-    //             [0,     1200,   0],
-    //             [400,   1200,   0],
-    //             [800,   1200,   0],
-    //             [-200,  1600,   0],
-    //             [200,   2000,   0],
-    //             [600,   1800,   0],
-    //             [0,     -800,   0],
-    //             [400,   -1100,  0],
-    //             [800,   -1400,  0],
-    //             [-900,  -1300,  0],
-    //             [-600,  -1100,  0],
-    //             [-800,  -1900,  0],
-    //         ];
-    //         for (var index = 0; index < treeAxis.length; index++) {
-    //             var newInstance = newMeshes[0].createInstance("i" + index);
-    //             var x = treeAxis[index][0];
-    //             var z = treeAxis[index][1];
-    //             var y = treeAxis[index][2];
+            shadowGenerator.getShadowMap().renderList.push(newMeshes[0]);
+            var treeAxis = [
+                [2000,  2000,   0],
+                [-2000, 2000,   100],
+                [-1800, 2300,   200],
+                [-2500, 1800,   240],
+                [-2000, 1600,   100],
+                [-2500, 1400,   100],
+                [-1000, 1000,   0],
+                [-1500, 400,    0],
+                [-1200, 0,      0],
+                [-1500, -300,   0],
+                [-2500, 0,      0],
+                [-2000, -300,   0],
+                [-2200, -900,   0],
+                [-1600, -1400,  0],
+                [0,     1200,   0],
+                [400,   1200,   0],
+                [800,   1200,   0],
+                [-200,  1600,   0],
+                [200,   2000,   0],
+                [600,   1800,   0],
+                [0,     -800,   0],
+                [400,   -1100,  0],
+                [800,   -1400,  0],
+                [-900,  -1300,  0],
+                [-600,  -1100,  0],
+                [-800,  -1900,  0],
+            ];
+            for (var index = 0; index < treeAxis.length; index++) {
+                var newInstance = newMeshes[0].createInstance("i" + index);
+                var x = treeAxis[index][0];
+                var z = treeAxis[index][1];
+                var y = treeAxis[index][2];
 
-    //             newInstance.position = new BABYLON.Vector3(x, y, z);
+                newInstance.position = new BABYLON.Vector3(x, y, z);
 
-    //             newInstance.rotate(BABYLON.Axis.Y, Math.random() * Math.PI * 2, BABYLON.Space.WORLD);
+                newInstance.rotate(BABYLON.Axis.Y, Math.random() * Math.PI * 2, BABYLON.Space.WORLD);
 
-    //             var scale = 0.5 + Math.random() * 2;
-    //             newInstance.scaling.addInPlace(new BABYLON.Vector3(scale, scale, scale));
+                var scale = 0.5 + Math.random() * 2;
+                newInstance.scaling.addInPlace(new BABYLON.Vector3(scale, scale, scale));
 
-    //             shadowGenerator.getShadowMap().renderList.push(newInstance);
-    //         }
-    //         shadowGenerator.getShadowMap().refreshRate = 0;
-    //         shadowGenerator.usePoissonSampling = true;
+                shadowGenerator.getShadowMap().renderList.push(newInstance);
+            }
+            shadowGenerator.getShadowMap().refreshRate = 0;
+            shadowGenerator.usePoissonSampling = true;
 
-    //         // Collisions
-    //         camera.checkCollisions = true;
-    //         camera.applyGravity = true;
-    //     });
-    // }
+            // Collisions
+            camera.checkCollisions = true;
+            camera.applyGravity = true;
+        });
+    }
 
     //generate skybox
     var skybox = BABYLON.Mesh.CreateBox("skyBox", 10000.0, scene);
@@ -288,7 +288,7 @@ var createScene = function(){
     BABYLON.SceneLoader.ImportMesh("","assets/models/terrain/","map-sticker.babylon",scene, function(newMeshes){
         var cameraStickerPosition = [
             [600,600],
-            [1500,-500],
+            [1000,-400],
             [-1000,-800],
             [-800,700]
         ];
@@ -355,11 +355,11 @@ var createScene = function(){
     });
 
     //import garden
-    // BABYLON.SceneLoader.ImportMesh("","assets/models/terrain/","garden.babylon",scene, function(newMeshes){
-    //     for(var i in newMeshes){
-    //         newMeshes[i].position.z += 19;
-    //     }
-    // });
+    BABYLON.SceneLoader.ImportMesh("","assets/models/terrain/","garden.babylon",scene, function(newMeshes){
+        for(var i in newMeshes){
+            newMeshes[i].position.z += 19;
+        }
+    });
     return scene;
 }
 
