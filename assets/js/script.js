@@ -168,7 +168,7 @@ var createScene = function(){
     hl.blurHorizontalSize   = 2;
     hl.blurVerticalSize     = 2;
 
-    var shadowGenerator = new BABYLON.ShadowGenerator(1024,light3);
+    // var shadowGenerator = new BABYLON.ShadowGenerator(1024,light3);
     var assetsManager = new BABYLON.AssetsManager(scene);
 
     // load house model
@@ -220,7 +220,7 @@ var createScene = function(){
             newMeshes[0].isVisible = false;
             newMeshes[0].position.y = ground.getHeightAtCoordinates(0, 0); // Getting height from ground object
 
-            shadowGenerator.getShadowMap().renderList.push(newMeshes[0]);
+            // shadowGenerator.getShadowMap().renderList.push(newMeshes[0]);
             var treeAxis = [
                 [2000,  2000,   0],
                 [-2000, 2000,   100],
@@ -262,10 +262,10 @@ var createScene = function(){
                 var scale = 0.5 + Math.random() * 2;
                 newInstance.scaling.addInPlace(new BABYLON.Vector3(scale, scale, scale));
 
-                shadowGenerator.getShadowMap().renderList.push(newInstance);
+                // shadowGenerator.getShadowMap().renderList.push(newInstance);
             }
-            shadowGenerator.getShadowMap().refreshRate = 0;
-            shadowGenerator.usePoissonSampling = true;
+            // shadowGenerator.getShadowMap().refreshRate = 0;
+            // shadowGenerator.usePoissonSampling = true;
 
             // Collisions
             camera.checkCollisions = true;
@@ -358,7 +358,58 @@ var createScene = function(){
     BABYLON.SceneLoader.ImportMesh("","assets/models/terrain/","garden.babylon",scene, function(newMeshes){
         for(var i in newMeshes){
             newMeshes[i].position.z += 19;
+            // newMeshes[i].position.y += 40;
         }
+        
+        //scatter trees
+        BABYLON.SceneLoader.ImportMesh("","assets/models/terrain/","tree-01.babylon",scene, function(newMeshes){
+            newMeshes[0].material.opacityTexture = null;
+            newMeshes[0].material.backFaceCulling = false;
+            newMeshes[0].isVisible = false;
+            newMeshes[0].position.y = ground.getHeightAtCoordinates(0, 0); // Getting height from ground object
+
+            // shadowGenerator.getShadowMap().renderList.push(newMeshes[0]);
+            var treeAxis = [
+                [400,  -450,   0],
+                [-300,  -450,   0],
+                [-300,  500,   0],
+                [100,  500,   0],
+            ];
+            for (var index = 0; index < treeAxis.length; index++) {
+                var newInstance = newMeshes[0].createInstance("i" + index);
+                var x = treeAxis[index][0];
+                var z = treeAxis[index][1];
+                var y = treeAxis[index][2];
+
+                newInstance.position = new BABYLON.Vector3(x, y, z);
+
+                newInstance.rotate(BABYLON.Axis.Y, Math.random() * Math.PI * 2, BABYLON.Space.WORLD);
+
+                var scale = Math.random()/5;
+                newInstance.scaling.addInPlace(new BABYLON.Vector3(scale, scale, scale));
+            }
+        });
+        // BABYLON.SceneLoader.ImportMesh("","assets/models/terrain/","fern.babylon",scene, function(newMeshes){
+        //     newMeshes[0].material.opacityTexture = null;
+        //     newMeshes[0].material.backFaceCulling = false;
+        //     newMeshes[0].isVisible = false;
+        //     var treeAxis = [
+        //         [450,  -450,   0],
+        //     ];
+        //     for (var index = 0; index < treeAxis.length; index++) {
+        //         var newInstance = newMeshes[0].createInstance("i" + index);
+        //         var x = treeAxis[index][0];
+        //         var z = treeAxis[index][1];
+        //         var y = treeAxis[index][2];
+
+        //         newInstance.position = new BABYLON.Vector3(x, y, z);
+
+        //         newInstance.rotate(BABYLON.Axis.Y, Math.random() * Math.PI * 2, BABYLON.Space.WORLD);
+
+        //         var scale = Math.random()/15;
+        //         newInstance.scaling.addInPlace(new BABYLON.Vector3(scale, scale, scale));
+        //     }
+        // });
     });
     return scene;
 }
